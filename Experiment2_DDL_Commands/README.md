@@ -105,124 +105,167 @@ CREATE TABLE Table_Name (
 
 **Question 1**
 --
--- Paste Question 1 here
+-- Insert a book with ISBN 978-1234567890, Title Data Science Essentials, Author Jane Doe, Publisher TechBooks, and Year 2024 into the Books table.
 
 ```sql
--- Paste your SQL code below for Question 1
+INSERT INTO Books VALUES ('978-1234567890', 'Data Science Essentials', 'Jane Doe', 'TechBooks', 2024);
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="1233" height="201" alt="image" src="https://github.com/user-attachments/assets/84d23e1a-cd5c-48f8-9db6-dd5374d7ad73" />
 
 **Question 2**
 ---
--- Paste Question 2 here
+-- Create a table named Products with the following constraints:
+
+ProductID should be the primary key.
+ProductName should be NOT NULL.
+Price is of real datatype and should be greater than 0.
+Stock is of integer datatype and should be greater than or equal to 0.
 
 ```sql
--- Paste your SQL code below for Question 2
+CREATE TABLE Products ( ProductID INTEGER PRIMARY KEY, ProductName TEXT NOT NULL, Price REAL CHECK (Price > 0), Stock INTEGER CHECK (Stock >= 0));
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="1077" height="223" alt="image" src="https://github.com/user-attachments/assets/6a21eccc-9cdc-4542-849c-6479e4275d22" />
 
 **Question 3**
 ---
--- Paste Question 3 here
+-- Insert all books from Out_of_print_books into Books
+
+Table attributes are ISBN, Title, Author, Publisher, YearPublished
 
 ```sql
--- Paste your SQL code below for Question 3
+INSERT INTO Books (ISBN, Title, Author, Publisher, YearPublished) SELECT ISBN, Title, Author, Publisher, YearPublished FROM Out_of_print_books;
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="1330" height="235" alt="image" src="https://github.com/user-attachments/assets/7eb48b03-82aa-4b0f-af73-41cbf7f184ad" />
 
 **Question 4**
 ---
--- Paste Question 4 here
+-- In the Cusomers table, insert a record where some fields are NULL, another record where all fields are filled without any NULL values, and a third record where some fields are filled, and others are left as NULL.
+
+CustomerID  Name          Address      City        ZipCode
+----------  ------------  ----------   ----------  ----------
+306         Diana Prince  Themyscira
+307         Bruce Wayne   Wayne Manor  Gotham      10007
+308         Peter Parker  Queens                   11375
 
 ```sql
--- Paste your SQL code below for Question 4
+INSERT INTO Customers VALUES (306, 'Diana Prince', 'Themyscira', NULL, NULL), (307, 'Bruce Wayne', 'Wayne Mano', 'Gotham', 10007), (308, 'Peter Parker', 'Queens', NULL, 11375);
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="1290" height="292" alt="image" src="https://github.com/user-attachments/assets/6d21e369-89af-44a9-b35c-22e4eacb1e4b" />
 
 **Question 5**
 ---
--- Paste Question 5 here
+-- Create a table named Orders with the following constraints:
+OrderID as INTEGER should be the primary key.
+OrderDate as DATE should be not NULL.
+CustomerID as INTEGER should be a foreign key referencing Customers(CustomerID).
 
 ```sql
--- Paste your SQL code below for Question 5
+CREATE TABLE Orders (OrderID INT PRIMARY KEY, OrderDate DATE NOT NULL, CustomerID INT, FOREIGN KEY (CustomerID) REFERENCES Customers(CustomerID));
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="1325" height="237" alt="image" src="https://github.com/user-attachments/assets/aaf6ba21-d9fc-4032-a758-418f2da1b80a" />
 
 **Question 6**
 ---
--- Paste Question 6 here
+-- Create a table named Employees with the following constraints:
+
+EmployeeID should be the primary key.
+FirstName and LastName should be NOT NULL.
+Email should be unique.
+Salary should be greater than 0.
+DepartmentID should be a foreign key referencing the Departments table.
 
 ```sql
--- Paste your SQL code below for Question 6
+CREATE TABLE Employees ( EmployeeID INT PRIMARY KEY, FirstName TEXT NOT NULL, LastName TEXT NOT NULL, Email TEXT UNIQUE, Salary REAL CHECK (Salary > 0), DepartmentID INT, FOREIGN KEY (DepartmentID) REFERENCES Departments(DepartmentID));
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="1335" height="330" alt="image" src="https://github.com/user-attachments/assets/4b45ebda-41c1-429e-9127-70e4c4123245" />
 
 **Question 7**
 ---
--- Paste Question 7 here
+-- Write a SQL query to add birth_date attribute as timestamp (datatype) in the table customer 
+
+Sample table: customer
+
+ customer_id |   cust_name    |    city    | grade | salesman_id 
+-------------+----------------+------------+-------+-------------
+        3002 | Nick Rimando   | New York   |   100 |        5001
+        3007 | Brad Davis     | New York   |   200 |        5001
+        3005 | Graham Zusi    | California |   200 |        5002
+ 
 
 ```sql
--- Paste your SQL code below for Question 7
+ALTER TABLE customer ADD birth_date timestamp;
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="1372" height="215" alt="image" src="https://github.com/user-attachments/assets/21a34c3c-a6cb-488b-a462-964642f35b67" />
 
 **Question 8**
 ---
--- Paste Question 8 here
+-- Create a table named Tasks with the following columns:
+
+TaskID as INTEGER
+TaskName as TEXT
+DueDate as DATE
 
 ```sql
--- Paste your SQL code below for Question 8
+CREATE TABLE Tasks ( TaskID INTEGER, TaskName TEXT, DueDate DATE );
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="1317" height="297" alt="image" src="https://github.com/user-attachments/assets/35ae4868-7c13-4d5d-9fbc-10d99577d734" />
 
 **Question 9**
 ---
--- Paste Question 9 here
+-- Write an SQL query to add two new columns, department_id and manager_id, to the table employee with datatype of INTEGER. The manager_id column should have a default value of NULL.
 
 ```sql
--- Paste your SQL code below for Question 9
+ALTER TABLE employee ADD department_id INTEGER;
+ALTER TABLE employee ADD manager_id INTEGER DEFAULT NULL;
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="1187" height="265" alt="image" src="https://github.com/user-attachments/assets/7ff191a7-ef2e-4484-8658-75315103b584" />
 
 **Question 10**
 ---
--- Paste Question 10 here
+-- Create a table named Department with the following constraints:
+DepartmentID as INTEGER should be the primary key.
+DepartmentName as TEXT should be unique and not NULL.
+Location as TEXT.
 
 ```sql
--- Paste your SQL code below for Question 10
+CREATE TABLE Department ( DepartmentID INTEGER PRIMARY KEY, DepartmentName TEXT NOT NULL UNIQUE, Location TEXT );
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="1373" height="185" alt="image" src="https://github.com/user-attachments/assets/c4640a4e-f2ff-40f2-aa41-6517d84d0a8c" />
 
 
 ## RESULT
 Thus, the SQL queries to implement different types of constraints and DDL commands have been executed successfully.
+
+<img width="1482" height="726" alt="image" src="https://github.com/user-attachments/assets/0665e6fe-f54f-451b-b19a-f32f1353fd91" />
+
+
