@@ -38,124 +38,291 @@ HAVING condition;
 
 **Question 1**
 --
--- Paste Question 1 here
+How many appointments are scheduled in each hour of the day?
+
+Sample table:Appointments Table
+
+name                              type
+--------------------          ----------
+AppointmentID               INTEGER
+PatientID                         INTEGER
+DoctorID                         INTEGER
+AppointmentDateTime   DATETIME
+Purpose                           TEXT
+Status                              TEXT     
 
 ```sql
--- Paste your SQL code below for Question 1
+SELECT strftime('%H', AppointmentDateTime) AS HourOfDay,
+       COUNT(*) AS TotalAppointments
+FROM Appointments
+GROUP BY strftime('%H', AppointmentDateTime)
+ORDER BY HourOfDay;
 ```
 
 **Output:**
 
-![Output1](output.png)
+<img width="470" height="310" alt="image" src="https://github.com/user-attachments/assets/eb3a1752-d556-4f6d-810f-c35d1b92c2e9" />
 
 **Question 2**
 ---
--- Paste Question 2 here
+Write a SQL Query to find how many medications are prescribed for each patient?
+
+Sample table:MedicalRecords Table
 
 ```sql
--- Paste your SQL code below for Question 2
+SELECT PatientID,
+       COUNT(*) AS AvgMedications
+FROM MedicalRecords
+GROUP BY PatientID;
 ```
 
 **Output:**
 
-![Output2](output.png)
+<img width="581" height="350" alt="image" src="https://github.com/user-attachments/assets/d24c0643-a1e4-4622-8f79-70231c0218f4" />
 
 **Question 3**
 ---
--- Paste Question 3 here
+How many appointments are scheduled for each doctor?
+
+Sample table:Appointments Table
+
+
+
+For example:
+
+Result
+DoctorID    TotalAppointments
+----------  -----------------
+3           3
+4           2
+6           1
+7           3
+10          1
 
 ```sql
--- Paste your SQL code below for Question 3
+SELECT DoctorID,
+       COUNT(*) AS TotalAppointments
+FROM Appointments
+GROUP BY DoctorID;
 ```
 
 **Output:**
 
-![Output3](output.png)
+<img width="618" height="362" alt="image" src="https://github.com/user-attachments/assets/19a26c63-0b59-4533-8297-fece5a35c20e" />
 
 **Question 4**
 ---
--- Paste Question 4 here
+Write a SQL query to find the maximum purchase amount.
+
+Sample table: orders
+
+ord_no      purch_amt   ord_date    customer_id  salesman_id
+
+----------  ----------  ----------  -----------  -----------
+
+70001       150.5       2012-10-05  3005         5002
+
+70009       270.65      2012-09-10  3001         5005
+
+70002       65.26       2012-10-05  3002         5001
+
+ 
+
+For example:
+
+Result
+MAXIMUM
+----------
+5760.0
 
 ```sql
--- Paste your SQL code below for Question 4
+SELECT MAX(purch_amt) AS MAXIMUM
+FROM orders;
 ```
 
 **Output:**
 
-![Output4](output.png)
+<img width="451" height="207" alt="image" src="https://github.com/user-attachments/assets/cbb3175c-d584-4a5e-9166-2033dd877880" />
 
 **Question 5**
 ---
--- Paste Question 5 here
+Write a SQL query to find the average length of email addresses (in characters):
+
+Table: customer
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+city        TEXT
+email       TEXT
+phone       INTEGER
+For example:
+
+Result
+avg_email_length
+----------------
+15.0
 
 ```sql
--- Paste your SQL code below for Question 5
+SELECT AVG(LENGTH(email)) AS avg_email_length
+FROM customer;
 ```
 
 **Output:**
 
-![Output5](output.png)
+<img width="603" height="197" alt="image" src="https://github.com/user-attachments/assets/c6a73610-99d0-45f4-85d6-ab2b8bb91ae4" />
 
 **Question 6**
 ---
--- Paste Question 6 here
+Write a SQL query to find the difference between the maximum and minimum price of fruits?
+
+Table: fruits
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+unit        TEXT
+inventory   INTEGER
+price       REAL
+ 
+
+For example:
+
+Result
+price_diff
+----------
+4.65
 
 ```sql
--- Paste your SQL code below for Question 6
+SELECT MAX(price) - MIN(price) AS price_diff
+FROM fruits;
 ```
 
 **Output:**
 
-![Output6](output.png)
+<img width="627" height="206" alt="image" src="https://github.com/user-attachments/assets/9eff73bc-f248-43e8-bf8e-94889057999f" />
 
 **Question 7**
 ---
--- Paste Question 7 here
+Write a SQL query to find the total amount of fruits with a unit type of 'LB'.
+
+Note: Inventory attribute contains amount of fruits
+
+Table: fruits
+
+name        type
+----------  ----------
+id          INTEGER
+name        TEXT
+unit        TEXT
+inventory   INTEGER
+price       REAL
+ 
+
+For example:
+
+Result
+total
+----------
+225
 
 ```sql
--- Paste your SQL code below for Question 7
+SELECT SUM(inventory) AS total
+FROM fruits
+WHERE unit = 'LB';
 ```
 
 **Output:**
 
-![Output7](output.png)
+<img width="462" height="198" alt="image" src="https://github.com/user-attachments/assets/e6721e77-8b63-4dd6-a42a-d62ed6956457" />
 
 **Question 8**
 ---
--- Paste Question 8 here
+Write an SQL query that groups the customer data into 5-year age intervals, calculates the minimum salary for each group, and excludes groups where the minimum salary is not less than 2000.
+
+Table: customer1
+
+
+
+For example:
+
+Result
+age_group   MIN(salary)
+----------  -----------
+25          1500
 
 ```sql
--- Paste your SQL code below for Question 8
+SELECT (age / 5) * 5 AS age_group,
+       MIN(salary)
+FROM customer1
+GROUP BY (age / 5) * 5
+HAVING MIN(salary) < 2000;
 ```
 
 **Output:**
 
-![Output8](output.png)
+<img width="508" height="206" alt="image" src="https://github.com/user-attachments/assets/f36ac3f5-0dc8-4d99-918c-11ad11ee49d8" />
 
 **Question 9**
 ---
--- Paste Question 9 here
+Write the SQL query that achieves the grouping of data by age intervals using the expression (age/5)5, calculates the total salary sum for each group, and excludes groups where the total salary sum is not greater than 5000.
+
+Sample table: customer1
+
+
+
+For example:
+
+Result
+age_group   SUM(salary)
+----------  -----------
+20          16500
+25          16500
 
 ```sql
--- Paste your SQL code below for Question 9
+SELECT (age / 5) * 5 AS age_group,
+       SUM(salary)
+FROM customer1
+GROUP BY (age / 5) * 5
+HAVING SUM(salary) > 5000;
 ```
 
 **Output:**
 
-![Output9](output.png)
+<img width="580" height="230" alt="image" src="https://github.com/user-attachments/assets/2821acf2-63b6-47c3-a305-9d83229529ea" />
 
 **Question 10**
 ---
--- Paste Question 10 here
+Write the SQL query that accomplishes the grouping of data by age intervals using the expression (age/5)5, calculates the minimum age for each group, and excludes groups where the minimum age is not less than 25.
+
+Sample table: customer1
+
+
+
+For example:
+
+Result
+age_group   MIN(age)
+----------  ----------
+20          22
 
 ```sql
--- Paste your SQL code below for Question 10
+SELECT (age / 5) * 5 AS age_group,
+       MIN(age)
+FROM customer1
+GROUP BY (age / 5) * 5
+HAVING MIN(age) < 25;
 ```
 
 **Output:**
 
-![Output10](output.png)
+<img width="625" height="206" alt="image" src="https://github.com/user-attachments/assets/09e2a383-50e1-4c82-a149-22fc54729393" />
 
 
 ## RESULT
 Thus, the SQL queries to implement aggregate functions, GROUP BY, and HAVING clause have been executed successfully.
+
+<img width="1493" height="705" alt="image" src="https://github.com/user-attachments/assets/1ad4120e-5ed1-4ea3-8a06-f90db727d4fd" />
+
